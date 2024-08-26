@@ -4,7 +4,9 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to prototype_path(@comment.prototype_id), notice: 'コメントが投稿されました。'
     else
-      render :show, alert: 'コメントの投稿に失敗しました。'
+      @prototype = @comment.prototype
+      @comments = @prototype.comments
+      render "prototypes/show"
     end
   end
 
